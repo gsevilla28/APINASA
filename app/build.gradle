@@ -1,0 +1,65 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "idmexico.com.mx.nasaapi"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    signingConfigs{
+        debug.initWith(signingConfigs.debug)
+        release{
+           /*storeFile file("release.keystore")
+            storePassword "secretpassword"
+            keyAlias "gradleforandroid"
+            keyPassword "secretpassword"
+            */
+        }
+    }
+
+
+
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "URL", "\"https://api.nasa.gov\""
+
+        }
+        debug {
+            minifyEnabled true
+            buildConfigField "String", "URL", "\"https://api.nasa.gov\""
+
+        }
+    }
+    /*diferentes versiones*/
+
+    productFlavors{
+        old_version{
+            applicationId "idmexico.com.mx.nasaapi.old"
+
+        }
+        actual_version{
+            applicationId "idmexico.com.mx.nasaapi.actual"
+        }
+    }
+
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    //compile 'https://api.nasa.gov/planetary/apod?api_key=avBrc43YusSSOaIWiWne5xKSh2qwkC0jN3e6CV1Z'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
+
+}
