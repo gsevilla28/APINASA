@@ -7,8 +7,10 @@ package idmexico.com.mx.nasaapi.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 
-public class Photo {
+/*se hace serializable  para enviar en el extra del intent*/
+public class Photo implements Serializable {
 
     @SerializedName("id")
     @Expose

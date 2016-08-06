@@ -3,6 +3,7 @@ package idmexico.com.mx.nasaapi.model;
 /**
  * Created by Alumno on 05/08/2016.
  */
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 
-public class Mars {
+public class Mars implements Serializable{
 
     @SerializedName("photos")
     @Expose

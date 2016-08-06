@@ -45,26 +45,25 @@ public class MainActivity extends AppCompatActivity {
         //Call<APOD> callApodService = apodService.getTodayApod(); /*ejmplo con parametro directo*/
 
         /*llamada al WS enviando parametros dinamicos*/
-        //Call<APOD> callApodService = apodService.getTodayApodWithQuery("avBrc43YusSSOaIWiWne5xKSh2qwkC0jN3e6CV1Z");
-        Call<Mars> callPhotoService = apodService.getPhotoWithQuery(1001,"avBrc43YusSSOaIWiWne5xKSh2qwkC0jN3e6CV1Z");
+        Call<APOD> callApodService = apodService.getTodayApodWithQuery("avBrc43YusSSOaIWiWne5xKSh2qwkC0jN3e6CV1Z");
+        //Call<Mars> callPhotoService = apodService.getPhotoWithQuery(1001,"avBrc43YusSSOaIWiWne5xKSh2qwkC0jN3e6CV1Z");
 
-        //callApodService.enqueue(new Callback<Mars>() {
-        callPhotoService.enqueue(new Callback<Mars>() {
+        callApodService.enqueue(new Callback<APOD>() {
+
             @Override
-            public void onResponse(Call<Mars> call, Response<Mars> response) {
+            public void onResponse(Call<APOD> call, Response<APOD> response) {
                 //Log.d("APOD", response.body().getTitle());
 
-                //txttitulo.setText("Titulo: " + response.body().getTitle());
+                txttitulo.setText("Titulo: " + response.body().getTitle());
                 //txttitulo.setText("Titulo: " + response.body().getPhotos().get(1).getId());
-                //txtexplicacion.setText("Explanation: " + response.body().getExplanation());
-                //txtfecha.setText("Fecha: " + response.body().getDate());
-                Picasso.with(getApplicationContext()).load(response.body().getPhotos().get(1).getImgSrc()).into(image);
-                Log.d("holas","asdasd");
+                txtexplicacion.setText("Explanation: " + response.body().getExplanation());
+                txtfecha.setText("Fecha: " + response.body().getDate());
+                //Picasso.with(getApplicationContext()).load(response.body().getPhotos().get(1).getImgSrc()).into(image);
 
             }
 
             @Override
-            public void onFailure(Call<Mars> call, Throwable t) {
+            public void onFailure(Call<APOD> call, Throwable t) {
 
             }
         });
