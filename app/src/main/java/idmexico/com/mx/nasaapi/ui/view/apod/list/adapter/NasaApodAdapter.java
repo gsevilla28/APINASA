@@ -1,0 +1,47 @@
+package idmexico.com.mx.nasaapi.ui.view.apod.list.adapter;
+
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import idmexico.com.mx.nasaapi.R;
+import idmexico.com.mx.nasaapi.model.Photo;
+
+
+/**
+ * Created by Alumno on 05/08/2016.
+ */
+public class NasaApodAdapter extends RecyclerView.Adapter<NasaApodViewHolder> {
+    private List<Photo> mars;
+
+    public NasaApodAdapter(List<Photo> mars){this.mars =mars;}
+
+    @Override
+    public NasaApodViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new NasaApodViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.nasa_apod_item,parent,false));
+    }
+
+    @Override
+    public void onBindViewHolder(NasaApodViewHolder holder, int position) {
+        Photo photo = mars.get(position);
+
+        Picasso.with(holder.itemApodImage.getContext()).load(photo.getImgSrc()).into(holder.itemApodImage);
+
+        holder.item_apod_title.setText(photo.getEarthDate());
+
+
+    }
+
+    @Override
+    public int getItemCount() {
+
+        return  mars != null ? mars.size() :0; /*este metodo indica cuantos elementos se van a mostrar en la vista, nunca debe estar en cero de lo contrario no mostrará nada*/
+
+    }
+}

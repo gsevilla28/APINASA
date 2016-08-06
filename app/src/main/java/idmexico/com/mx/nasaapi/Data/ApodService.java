@@ -1,6 +1,7 @@
 package idmexico.com.mx.nasaapi.Data;
 
 import idmexico.com.mx.nasaapi.model.APOD;
+import idmexico.com.mx.nasaapi.model.Mars;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -15,5 +16,8 @@ public interface ApodService {
 
     @GET("planetary/apod")
     Call<APOD> getTodayApodWithQuery(@Query("api_key") String api_key);
+
+    @GET("mars-photos/api/v1/rovers/curiosity/photos")
+    Call<Mars> getPhotoWithQuery(@Query("sol") int sol, @Query("api_key") String api_key);
 
 }
