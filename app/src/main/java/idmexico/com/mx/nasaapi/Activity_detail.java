@@ -3,6 +3,7 @@ package idmexico.com.mx.nasaapi;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,6 +30,8 @@ public class Activity_detail extends AppCompatActivity {
         TextView cameraDetail;
     @BindView(R.id.image_detail)
         ImageView imagen;
+    //@BindView(R.id.toolbarPrincipal)
+      //  Toolbar toolbar;
 
 
     @Override
@@ -36,6 +39,8 @@ public class Activity_detail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
+
+
 
 
         //Photo Photodatos = (Photo) Comunicador.getObject();
