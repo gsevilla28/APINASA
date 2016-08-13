@@ -2,6 +2,7 @@ package idmexico.com.mx.nasaapi.app;
 
 import android.app.Application;
 
+import com.facebook.FacebookSdk;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 /**
@@ -14,5 +15,6 @@ public class NasaApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Fresco.initialize(this);
+        FacebookSdk.sdkInitialize(this);
     }
 }

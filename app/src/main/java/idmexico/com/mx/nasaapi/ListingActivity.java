@@ -9,8 +9,18 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.drawee.view.SimpleDraweeView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +44,11 @@ public class ListingActivity extends AppCompatActivity {
 
     @BindView(R.id.listing_navigation_drawer)
     DrawerLayout drawerLayout;
+
+    @BindView(R.id.image_header)
+    SimpleDraweeView image;
+    @BindView(R.id.text_header)
+    TextView texnombre;
 
 
     @Override
@@ -89,6 +104,8 @@ public class ListingActivity extends AppCompatActivity {
 
 
 
+
+
         /*LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(10,StaggeredGridLayoutManager.VERTICAL);
@@ -129,7 +146,28 @@ public class ListingActivity extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
 
     }
+    /*metodo para obtener datos de facebook*/
+    private void getFBuserinfo(){
 
+        GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+            @Override
+            public void onCompleted(JSONObject object, GraphResponse response) {
+                try {
+                    //Log.d("nombre",object.getString("name"));
 
+                    image.setImageURI("http://graph.facebook.com/" + object.getString("id") + "/picture?type=large");
+                    texnombre.setText(object.getString("name"));
+
+                    //Log.d("id",object.getString("id"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+        graphRequest.executeAsync();
+
+    }
 
 }
+

@@ -7,13 +7,14 @@
     android:background="@color/colorPrimary">
 
     <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/image_header"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@mipmap/ic_launcher"
         android:layout_margin="15dp"
         />
 
     <TextView
+        android:id="@+id/text_header"
         android:textColor="#FFFFFF"
         tools:text="Gerardo Sevilla"
         android:layout_width="wrap_content"
