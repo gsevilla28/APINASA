@@ -10,6 +10,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnLongClick;
 import idmexico.com.mx.nasaapi.R;
 import idmexico.com.mx.nasaapi.model.Photo;
 

@@ -3,6 +3,7 @@ package idmexico.com.mx.nasaapi.fragmentos;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -42,10 +43,17 @@ public class fragment_favorites extends Fragment {
         ButterKnife.bind(this,view);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
+
         vistaReciclada.setLayoutManager(gridLayoutManager);
         final FavoritesAdapter favoritesAdapter = new FavoritesAdapter();
+        favoritesAdapter.setOnItemClickListener(new FavoritesAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(APOD apod){
+                Snackbar.make(getView(),"seleccionado: "+ apod.getTitle(),Snackbar.LENGTH_SHORT).show();
+            }
+        });
 
-        /*obtener lista de favoritos*/
+        /*obtener lista de favoritos en SQLite*/
         DataSource dataSource = new DataSource(getActivity());
 
         ArrayList<APOD> listafavoritos = (ArrayList<APOD>) dataSource.getAllFavorites();

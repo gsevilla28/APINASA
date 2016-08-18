@@ -4,10 +4,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+
 import java.util.List;
 
 import idmexico.com.mx.nasaapi.R;
 import idmexico.com.mx.nasaapi.model.APOD;
+import idmexico.com.mx.nasaapi.model.Photo;
 
 
 /**
@@ -17,6 +19,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoriteHolder> {
     public FavoritesAdapter(){}
 
     private List<APOD> apodList;
+    private OnItemClickListener onItemClickListener;
+
 
     @Override
     public FavoriteHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -32,6 +36,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoriteHolder> {
         holder.imageFavorite.setImageURI(apod.getUrl()); /*utilizando fresco*/
         holder.title_favorite.setText(apod.getTitle());
 
+        holder.setItemClick(apod, onItemClickListener);
+
     }
 
     @Override
@@ -40,5 +46,13 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoriteHolder> {
     }
     public void setListAPOD(List<APOD> marsAPOD){
         this.apodList=marsAPOD;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        this.onItemClickListener=onItemClickListener;
+    }
+
+    public interface OnItemClickListener{
+        void onItemClick(APOD apod);
     }
 }

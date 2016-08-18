@@ -16,7 +16,7 @@ import idmexico.com.mx.nasaapi.model.Photo;
 public class NasaApodAdapter extends RecyclerView.Adapter<NasaApodViewHolder> {
     private List<Photo> photoList;
     private OnItemClickListener onItemClickListener;
-    public NasaApodAdapter(List<Photo> mars){this.photoList =mars;}
+    //public NasaApodAdapter(List<Photo> mars){this.photoList =mars;}
 
     public NasaApodAdapter(){} /*constructor por default*/
 
