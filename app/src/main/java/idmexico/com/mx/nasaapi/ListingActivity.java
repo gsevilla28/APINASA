@@ -1,6 +1,9 @@
 package idmexico.com.mx.nasaapi;
 
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -9,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,8 +26,12 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import idmexico.com.mx.nasaapi.fragmentos.fragment_favorites;
 import idmexico.com.mx.nasaapi.fragmentos.fragment_list;
 import idmexico.com.mx.nasaapi.fragmentos.fragment_listing;
 
@@ -44,11 +52,6 @@ public class ListingActivity extends AppCompatActivity {
 
     @BindView(R.id.listing_navigation_drawer)
     DrawerLayout drawerLayout;
-
-    @BindView(R.id.image_header)
-    SimpleDraweeView image;
-    @BindView(R.id.text_header)
-    TextView texnombre;
 
 
     @Override
@@ -77,7 +80,8 @@ public class ListingActivity extends AppCompatActivity {
                         getFragmentManager().beginTransaction().replace(R.id.Fragmento_holder,new fragment_listing()).commit();
                         break;
                     case R.id.favorite_item:
-                        Snackbar.make(findViewById(android.R.id.content),"Favorite item",Snackbar.LENGTH_SHORT).show();
+                        //Snackbar.make(findViewById(android.R.id.content),"Favorite item",Snackbar.LENGTH_SHORT).show();
+                        getFragmentManager().beginTransaction().replace(R.id.Fragmento_holder,new fragment_favorites()).commit();
                         break;
                 }
 
@@ -100,6 +104,19 @@ public class ListingActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
+        // Add code to print out the key hash
+        /*try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    "idmexico.com.mx.nasaapi",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+        } catch (NoSuchAlgorithmException e) {
+        }*/
 
 
 
@@ -142,8 +159,7 @@ public class ListingActivity extends AppCompatActivity {
             }
         });*/
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        getFBuserinfo();
 
     }
     /*metodo para obtener datos de facebook*/
@@ -155,10 +171,13 @@ public class ListingActivity extends AppCompatActivity {
                 try {
                     //Log.d("nombre",object.getString("name"));
 
-                    image.setImageURI("http://graph.facebook.com/" + object.getString("id") + "/picture?type=large");
-                    texnombre.setText(object.getString("name"));
+                    SimpleDraweeView userImagen = (SimpleDraweeView)findViewById(R.id.image_header);
+                    userImagen.setImageURI("http://graph.facebook.com/" + object.getString("id") + "/picture?type=large");
 
-                    //Log.d("id",object.getString("id"));
+                    TextView simple_text = (TextView) findViewById(R.id.text_header);
+                    simple_text.setText(object.getString("name"));
+
+                    //Log.d("id","http://graph.facebook.com/" + object.getString("id") + "/picture?type=large");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

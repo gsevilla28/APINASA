@@ -1,5 +1,6 @@
 package idmexico.com.mx.nasaapi.login;
 
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,11 +14,12 @@ import com.facebook.login.widget.LoginButton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import idmexico.com.mx.nasaapi.ListingActivity;
 import idmexico.com.mx.nasaapi.R;
 
 public class FBLogin extends AppCompatActivity implements FacebookCallback<LoginResult>{
 
-    CallbackManager callbackManager;
+    private CallbackManager callbackManager;
     @BindView(R.id.fb_login_button)
     LoginButton loginButton;
 
@@ -34,6 +36,7 @@ public class FBLogin extends AppCompatActivity implements FacebookCallback<Login
 
         if (AccessToken.getCurrentAccessToken() !=null){
             Snackbar.make(findViewById(android.R.id.content),"PRELOGIN",Snackbar.LENGTH_SHORT);
+            startActivity( new Intent(this, ListingActivity.class));
         }
 
 
@@ -42,7 +45,8 @@ public class FBLogin extends AppCompatActivity implements FacebookCallback<Login
 
     @Override
     public void onSuccess(LoginResult loginResult) {
-
+        Snackbar.make(findViewById(android.R.id.content),"PRELOGIN-on success",Snackbar.LENGTH_SHORT);
+        startActivity( new Intent(this, ListingActivity.class));
     }
 
     @Override
@@ -53,5 +57,11 @@ public class FBLogin extends AppCompatActivity implements FacebookCallback<Login
     @Override
     public void onError(FacebookException error) {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode,data);
     }
 }

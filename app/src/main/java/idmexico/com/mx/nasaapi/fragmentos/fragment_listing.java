@@ -55,9 +55,9 @@ public class fragment_listing extends Fragment {
         ButterKnife.bind(this,view);
 
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        //LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(10,StaggeredGridLayoutManager.VERTICAL);
+        //StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(10,StaggeredGridLayoutManager.VERTICAL);
 
         marsRoverListingRecycler.setLayoutManager(gridLayoutManager);
 
@@ -65,7 +65,6 @@ public class fragment_listing extends Fragment {
         nasaApodAdapter.setOnItemClickListener(new NasaApodAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Photo photo) {
-                //Comunicador.SetObjet(photo);
 
                 Intent intent = new Intent(getActivity(),Activity_detail.class);
                 intent.putExtra("parametro",photo);
